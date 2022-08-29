@@ -43,8 +43,6 @@ commands:
               npm run migrations:revert
             fi     
 
-
-
     # JOBS SECTION
 
 jobs:
@@ -260,8 +258,6 @@ jobs:
           workflow-id: "${CIRCLE_WORKFLOW_ID:0:7}"
 
 
-
-
      # DEPLOY FRONTEND
 
   deploy-frontend:
@@ -338,8 +334,6 @@ jobs:
           workflow-id: "${CIRCLE_WORKFLOW_ID:0:7}"
       - reverse-migration:
           workflow-id: "${CIRCLE_WORKFLOW_ID:0:7}"
-
-
 
 
    # SMOKE TEST
@@ -474,8 +468,8 @@ workflows:
           requires: [run-migrations]
       - smoke-test:
           requires: [deploy-backend, deploy-frontend]
-      # - cloudfront-update:
-      #     requires: [smoke-test]
+      - cloudfront-update:
+          requires: [smoke-test]
       # - cleanup:
       #     requires: [cloudfront-update]
 
